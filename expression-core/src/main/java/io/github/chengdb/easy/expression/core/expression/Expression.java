@@ -45,6 +45,43 @@ public abstract class Expression implements Serializable {
     }
 
     /**
+     * 不使用上下文执行表达式
+     * @return 执行后的结果
+     */
+    public Object executeWithoutContext() throws ExpressionExecuteException {
+        return execute((Context) null);
+    }
+
+    /**
+     * 执行表达式
+     * @return 执行后的结果
+     */
+    public Object execute() throws ExpressionExecuteException {
+        return execute(Context.newNonResourceContext());
+    }
+
+
+    /**
+     * 执行表达式
+     * @param targetClass 结果类型的class
+     * @return 执行后的结果
+     * @param <T> 结果类型
+     */
+    public <T> T execute(Class<T> targetClass) throws ExpressionExecuteException {
+        return execute(Context.newNonResourceContext(), targetClass);
+    }
+
+    /**
+     * 不使用上下文执行表达式
+     * @param targetClass 结果类型的class
+     * @return 执行后的结果
+     * @param <T> 结果类型
+     */
+    public <T> T executeWithoutContext(Class<T> targetClass) throws ExpressionExecuteException {
+        return execute(null, targetClass);
+    }
+
+    /**
      * 执行表达式并指定结果类型
      * @param context 上下文
      * @param targetClass 结果类型的class
