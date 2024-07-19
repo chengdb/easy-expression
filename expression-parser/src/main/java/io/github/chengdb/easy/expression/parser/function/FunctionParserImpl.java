@@ -363,7 +363,7 @@ public class FunctionParserImpl extends FunctionParser {
          * @throws FunctionParseException 检查失败
          */
         private void checkArgType(FunctionCache functionCache, int argTypeIndex, Class<?> type) throws FunctionParseException {
-            if (functionCache.returnType == type || type == Object.class || functionCache.returnType == Object.class) {
+            if (type.isAssignableFrom(functionCache.returnType) || type == Object.class || functionCache.returnType == Object.class) {
                 argFunctionCaches.add(functionCache);
             } else {
                 throw new FunctionParseException(functionClassInfo.funcAnnotation.name() + "函数的第" + (argTypeIndex + 1) +
